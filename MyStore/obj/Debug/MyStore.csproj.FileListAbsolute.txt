@@ -1,0 +1,16 @@
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\bin\Debug\MyStore.exe.config
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\bin\Debug\MyStore.exe
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\bin\Debug\MyStore.pdb
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.csprojAssemblyReference.cache
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.Form1.resources
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.Properties.Resources.resources
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.csproj.GenerateResource.cache
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.csproj.CoreCompileInputs.cache
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.exe
+c:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.pdb
+C:\Users\RLU\Documents\Visual Studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.Home.resources
+C:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.DisplayItems.resources
+C:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.Profile.resources
+C:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.AccountBalance.resources
+C:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.AllPurchases.resources
+C:\Users\RLU\documents\visual studio 2017\Projects\MyStore\MyStore\obj\Debug\MyStore.SpecificPurchase.resources

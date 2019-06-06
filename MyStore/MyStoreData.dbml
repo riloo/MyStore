@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="STORE" Class="MyStoreDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=RLUS-LAPTOP;Initial Catalog=STORE;Integrated Security=True" SettingsObjectName="MyStore.Properties.Settings" SettingsPropertyName="STOREConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.USERS" Member="USERs">
+    <Type Name="USER">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="user_password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="user_address" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="user_balance" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Association Name="USER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="userID" OtherKey="custID" Type="ORDER_DETAIL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ITEMS" Member="ITEMs">
+    <Type Name="ITEM">
+      <Column Name="item_upc" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="item_description" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="item_price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Association Name="ITEM_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="item_upc" OtherKey="item_upc" Type="ORDER_DETAIL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_DETAILS" Member="ORDER_DETAILs">
+    <Type Name="ORDER_DETAIL">
+      <Column Name="order_num" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="order_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="custID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="item_upc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="order_price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Association Name="USER_ORDER_DETAIL" Member="USER" ThisKey="custID" OtherKey="userID" Type="USER" IsForeignKey="true" />
+      <Association Name="ITEM_ORDER_DETAIL" Member="ITEM" ThisKey="item_upc" OtherKey="item_upc" Type="ITEM" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
