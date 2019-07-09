@@ -17,23 +17,26 @@ namespace MyStore
         {
             this.id = id;
             InitializeComponent();
-            MyStoreDataDataContext db = new MyStoreDataDataContext();
-
-            var orders = from order in db.ORDER_DETAILs
-                         where id == order.custID
-                         select order;
-
-            foreach (var o in orders)
+            using (MyStoreDataDataContext db = new MyStoreDataDataContext())
             {
-                String desc = db.ITEMs.Where(p => p.item_upc == o.item_upc).Select(p => p.item_description).First();
-                string[] row = {o.order_num.ToString(),
+
+                var orders = from order in db.ORDER_DETAILs
+                             where id == order.custID
+                             select order;
+
+
+                foreach (var o in orders)
+                {
+                    String desc = db.ITEMs.Where(p => p.item_upc == o.item_upc).Select(p => p.item_description).First();
+                    string[] row = {o.order_num.ToString(),
                                 o.order_date.ToString(),
                                 desc,
                                 o.order_quantity.ToString(),
                                 "$ " + o.order_price.ToString()};
-                var listViewItem = new ListViewItem(row);
-                purchaseList.Items.Add(listViewItem);
-               
+                    var listViewItem = new ListViewItem(row);
+                    purchaseList.Items.Add(listViewItem);
+
+                }
             }
         }
 

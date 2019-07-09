@@ -61,6 +61,7 @@ namespace MyStore
 
         private void backLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            db.Dispose();
             Profile profile = new Profile(id);
             this.Close();
             profile.Show();

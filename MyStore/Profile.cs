@@ -19,14 +19,16 @@ namespace MyStore
             this.id = id;
             InitializeComponent();
 
-            MyStoreDataDataContext db = new MyStoreDataDataContext();
+            using (MyStoreDataDataContext db = new MyStoreDataDataContext())
+            {
 
-            var user = from u in db.USERs
+                var user = from u in db.USERs
                            where id == u.userID
                            select u;
-            
-            fillName.Text = user.First().username;
-            fillAddress.Text = user.First().user_address;
+
+                fillName.Text = user.First().username;
+                fillAddress.Text = user.First().user_address;
+            }
         }
 
         private void Profile_Load(object sender, EventArgs e)

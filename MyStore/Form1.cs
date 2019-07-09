@@ -21,20 +21,22 @@ namespace MyStore
         private void loginLbl_Click(object sender, EventArgs e)
         {
             //var conn = Singleton.Instance;
-            MyStoreDataDataContext db = new MyStoreDataDataContext();
-
-            if(db.USERs.Where(p => p.username == usernameTxt.Text && p.user_password == passTxt.Text).Count() == 1)
+            using (MyStoreDataDataContext db = new MyStoreDataDataContext())
             {
-                var id = db.USERs.Where(p => p.username == usernameTxt.Text).Select(p => p.userID).First();
-                Home home = new Home(id);
-                this.Hide();
-                db.Dispose();
-                home.Show();
 
-            }
-            else
-            {
-                MessageBox.Show("Wrong username or password! Please try again!" );
+                if (db.USERs.Where(p => p.username == usernameTxt.Text && p.user_password == passTxt.Text).Count() == 1)
+                {
+                    var id = db.USERs.Where(p => p.username == usernameTxt.Text).Select(p => p.userID).First();
+                    Home home = new Home(id);
+                    this.Hide();
+                    db.Dispose();
+                    home.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("Wrong username or password! Please try again!");
+                }
             }
         }
 

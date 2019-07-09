@@ -71,54 +71,56 @@ namespace MyStore
 
         private void goBtn_Click(object sender, EventArgs e)
         {
-            MyStoreDataDataContext db = new MyStoreDataDataContext();
-            purchaseList.Items.Clear();
-
-            if (dateRadio.Checked)
+            using (MyStoreDataDataContext db = new MyStoreDataDataContext())
             {
-                DateTime dFrom = dateFromPicker.Value.Date;
-                DateTime dTo = dateToPicker.Value.Date;
+                purchaseList.Items.Clear();
 
-                var orders = from order in db.ORDER_DETAILs
-                             where id == order.custID
-                             where order.order_date >= dFrom
-                             where order.order_date <= dTo
-                             select order;
-
-                foreach (var o in orders)
+                if (dateRadio.Checked)
                 {
-                    String desc = db.ITEMs.Where(p => p.item_upc == o.item_upc).Select(p => p.item_description).First();
-                    string[] row = {o.order_num.ToString(),
+                    DateTime dFrom = dateFromPicker.Value.Date;
+                    DateTime dTo = dateToPicker.Value.Date;
+
+                    var orders = from order in db.ORDER_DETAILs
+                                 where id == order.custID
+                                        && order.order_date >= dFrom
+                                        && order.order_date <= dTo
+                                 select order;
+
+                    foreach (var o in orders)
+                    {
+                        String desc = db.ITEMs.Where(p => p.item_upc == o.item_upc).Select(p => p.item_description).First();
+                        string[] row = {o.order_num.ToString(),
                                 o.order_date.ToString(),
                                 desc,
                                 o.order_quantity.ToString(),
                                 "$ " + o.order_price.ToString()};
-                    var listViewItem = new ListViewItem(row);
-                    purchaseList.Items.Add(listViewItem);
+                        var listViewItem = new ListViewItem(row);
+                        purchaseList.Items.Add(listViewItem);
+                    }
                 }
-            }
-            else if(priceRadio.Checked)
-            {
-
-                decimal pFrom = Convert.ToDecimal(priceFromTxt.Text);
-                decimal pTo = Convert.ToDecimal(priceToTxt.Text);
-
-                var orders = from order in db.ORDER_DETAILs
-                             where id == order.custID
-                             where order.order_price >= pFrom
-                             where order.order_price <= pTo
-                             select order;
-
-                foreach (var o in orders)
+                else if (priceRadio.Checked)
                 {
-                    String desc = db.ITEMs.Where(p => p.item_upc == o.item_upc).Select(p => p.item_description).First();
-                    string[] row = {o.order_num.ToString(),
+
+                    decimal pFrom = Convert.ToDecimal(priceFromTxt.Text);
+                    decimal pTo = Convert.ToDecimal(priceToTxt.Text);
+
+                    var orders = from order in db.ORDER_DETAILs
+                                 where id == order.custID
+                                 where order.order_price >= pFrom
+                                 where order.order_price <= pTo
+                                 select order;
+
+                    foreach (var o in orders)
+                    {
+                        String desc = db.ITEMs.Where(p => p.item_upc == o.item_upc).Select(p => p.item_description).First();
+                        string[] row = {o.order_num.ToString(),
                                 o.order_date.ToString(),
                                 desc,
                                 o.order_quantity.ToString(),
                                 "$ " + o.order_price.ToString()};
-                    var listViewItem = new ListViewItem(row);
-                    purchaseList.Items.Add(listViewItem);
+                        var listViewItem = new ListViewItem(row);
+                        purchaseList.Items.Add(listViewItem);
+                    }
                 }
             }
         }

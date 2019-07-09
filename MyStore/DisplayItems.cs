@@ -48,33 +48,36 @@ namespace MyStore
                 if (dataGridView1[e.ColumnIndex - 1, e.RowIndex].Value != null)
                 {
                     quantity = Convert.ToInt32(dataGridView1[e.ColumnIndex - 1, e.RowIndex].Value);
-                                      
-                    MyStoreDataDataContext db = new MyStoreDataDataContext();
-                    int creditLimit = 10000;
-                    var userBalance = db.USERs.Where(p => p.userID == id).Select(p => p.user_balance).First();
-                    if (quantity * price > creditLimit - userBalance)
+
+                    using (MyStoreDataDataContext db = new MyStoreDataDataContext())
                     {
-                        MessageBox.Show("That amount is over your credit limit!");
-                    }
-                    else
-                    {
-                        var date = Convert.ToDateTime(DateTime.Now.Date.ToString("dd/MM/yyyy"));
+                        int creditLimit = 10000;
+                        var userBalance = db.USERs.Where(p => p.userID == id).Select(p => p.user_balance).First();
+                        if (quantity * price > creditLimit - userBalance)
+                        {
+                            MessageBox.Show("That amount is over your credit limit!");
+                        }
+                        else
+                        {
+                            var date = Convert.ToDateTime(DateTime.Now.Date.ToString("MM/dd/yyyy"));
 
-                        ORDER_DETAIL o = new ORDER_DETAIL();
-                        o.order_date = date;
-                        o.custID = id;
-                        o.item_upc = upc;
-                        o.order_quantity = quantity;
-                        o.order_price = price * quantity;
-                        MessageBox.Show(date + " " + id + " " + upc + " " + quantity + " " + price * quantity);
+                            ORDER_DETAIL o = new ORDER_DETAIL();
+                            o.order_date = date;
+                            o.custID = id;
+                            o.item_upc = upc;
+                            o.order_quantity = quantity;
+                            o.order_price = price * quantity;
+                            //MessageBox.Show(date + " " + id + " " + upc + " " + quantity + " " + price * quantity);
 
-                        db.ORDER_DETAILs.InsertOnSubmit(o);
-                        db.SubmitChanges();
+                            db.ORDER_DETAILs.InsertOnSubmit(o);
+                            db.SubmitChanges();
 
-                        MessageBox.Show("You just bought " + quantity + " " + item + " for $" + price * quantity);
+                            MessageBox.Show("You just bought " + quantity + " " + item + " for $" + price * quantity);
+                        }
                     }
                 }
                 else MessageBox.Show("Please choose an amount greater than 0");
+                
                 
             }
         }
